@@ -2,29 +2,33 @@
 
 import { createContext, useContext, useState } from "react";
 
-const RoomContext = createContext();
+const RoomContext = createContext(null);
 
 export const RoomProvider = ({ children }) => {
-    const [Room, setRoom] = useState([
-        { id: 1, name: "Room A", status: "Full" },
-        { id: 2, name: "Room B", status: "Pending" },
-        { id: 3, name: "Room C", status: "Pending" },
-        { id: 4, name: "Room D", status: "Full" },
-        { id: 5, name: "Room E", status: "Pending" },
+    const [rooms, setRooms] = useState([
+        { id: 1, date: "2023-06-01", booked_count: 2, client: "John Doe", room: "Computer Room", status: "Available" },
+        { id: 2, date: "2023-06-02", booked_count: 1, client: "Jane Smith", room: "Electricity Room", status: "Available" },
+        { id: 3, date: "2023-06-03", booked_count: 3, client: "Mark Johnson", room: "Physics Room", status: "Not Available" },
+        { id: 4, date: "2023-06-04", booked_count: 1, client: "Emily Davis", room: "Chemistry Room", status: "Available" },
+        { id: 5, date: "2023-06-05", booked_count: 2, client: "Robert Wilson", room: "Design Room", status: "Not Available" },
     ]);
-    const [filteredRoom, setFilteredRoom] = useState();
+    const [filteredRoom, setFilteredRoom] = useState([]);
+    const [booking, setBooking] = useState([]);
+
+    
 
     const addRoom = (newRoom) => {
-        setRoom(prev => [...prev, { ...newRoom, id: Date.now(), status: "Pending" }]);
+        setRooms(prev => [...prev, { ...newRoom, id: Date.now(), status: "Available" }]);
     };
 
     const deleteRoom = (id) => {
-        setRoom(prev => prev.filter(Room => Room.id !== id));
+        setRooms(prev => prev.filter(room => room.id !== id));
     }
 
     return (
         <RoomContext.Provider value={{
-            Room,
+            rooms,
+            setRooms,
             filteredRoom,
             addRoom,
             deleteRoom,
@@ -34,4 +38,10 @@ export const RoomProvider = ({ children }) => {
     );
 };
 
-export const useRoom = () => useContext(RoomContext);
+export const useRoom = () => {
+    const context = useContext(RoomContext);
+    if (!context) {
+        throw new Error("useRoom must be used within RoomProvider");
+    }
+    return context;
+};

@@ -6,15 +6,18 @@ import App from './App.tsx'
 import { AuthProvider } from './context/authContext.tsx'
 import { NotificationProvider } from './context/notificationContext.tsx'
 import { BookingProvider } from './context/bookingContext.tsx'
+import { RoomProvider } from './context/RoomContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <NotificationProvider>
       <AuthProvider>
-        <BookingProvider>
-          <App />
-        </BookingProvider>
+        <RoomProvider>
+          <BookingProvider>
+            <App />
+          </BookingProvider>
+        </RoomProvider>
       </AuthProvider>
     </NotificationProvider>
-  </StrictMode>,
+  </StrictMode>
 )

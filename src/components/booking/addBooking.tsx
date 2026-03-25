@@ -27,13 +27,13 @@ const AddBooking = () => {
             <Container>
                 <Modal show={show} onHide={() => setShow(false)} centered>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add Product</Modal.Title>
+                        <Modal.Title>Add Room</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
                         <Form onSubmit={handleAddProduct}>
                             <Form.Group className="mb-3">
-                                <Form.Label>Product Name</Form.Label>
+                                <Form.Label>Room Name</Form.Label>
                                 <Form.Control
                                     type="text"
                                     value={productName}
@@ -44,7 +44,7 @@ const AddBooking = () => {
                             </Form.Group>
 
                             <Form.Group className="mb-3">
-                                <Form.Label>Product Price</Form.Label>
+                                <Form.Label>Room Price</Form.Label>
                                 <Form.Control
                                     type="number"
                                     value={productPrice}

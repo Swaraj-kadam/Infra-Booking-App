@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import '../../assets/style.css';
+import useAuth from '../../context/authContext';
 
 const Navbar = () => {
+    const { isLoggedIn } = useAuth();
 
     return (
         <nav className="Navbar">
@@ -9,18 +11,19 @@ const Navbar = () => {
             <h2>Wellcome {'Guest'}</h2>
             <li>
                 <Link to='/' >Home</Link>
-                <Link to='/booking'>Booking</Link>
-                {/* {!isLoggedIn && <> */}
+                <Link to='/room'>Rooms</Link>
+                {!isLoggedIn && <>
                     <Link to='/login'>Login</Link>
                     <Link to='/register'>Register</Link>
-                {/* </>} */}
-                {/* {isLoggedIn && <>
-                    <Link to='/cart'><img src={cartIcon} alt='Cart'width={25} height={25} style={{background:'transperant'}}/> {cart.length > 0 && <>{cart.length}</>}</Link>
+                </>}
+                {isLoggedIn && <>
+                    {/* <Link to='/cart'><img src={cartIcon} alt='Cart'width={25} height={25} style={{background:'transperant'}}/> {cart.length > 0 && <>{cart.length}</>}</Link>
                     <Link to='/checkout'>Checkout</Link>
                     <Link to='/order'>Order</Link>
-                    <Link to='/user'>User</Link>
+                    <Link to='/user'>User</Link> */}
+                    <Link to='/booking'>Booking</Link>
                     <Link to='/logout'>Logout</Link>
-                </>} */}
+                </>}
             </li>
         </nav> 
     )

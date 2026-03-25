@@ -25,10 +25,7 @@ const Booking = () => {
             <div>
                 <Card>
                     <Card.Header className="d-flex">
-                        <h1>Product List</h1>
-                        {userRole === "admin" && (
-                            <AddBooking />
-                        )}
+                        <h1>Booking List</h1>
                     </Card.Header>
                     <Card.Body>
                         {/* <ProductFilter type={handleProductFilter}></ProductFilter> */}
@@ -36,7 +33,7 @@ const Booking = () => {
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Client Name</th>
+                                    {/* <th>Client Name</th> */}
                                     <th>Room</th>
                                     <th>Date</th>
                                     <th>Status</th>
@@ -47,29 +44,19 @@ const Booking = () => {
                                 {booking.map(b => (
                                     <tr key={b.id}>
                                         <td>{b.id}</td>
-                                        <td>{b.client}</td>
+                                        {/* <td>{b.client}</td> */}
                                         <td>{b.room}</td>
                                         <td>{b.date}</td>
-                                        <td>{b.status}</td>
+                                        <td style={{ backgroundColor: b.status === "Available" ? "green" : "red" }}>{b.status}</td>
                                         <td>
                                             <Button
                                                 className="btn-sm mx-1"
-                                                variant="success"
+                                                variant="danger"
                                                 disabled={!isLoggedIn}
-                                            // onClick={() => { addToCart(product.id) }}
+                                                onClick={() => { deleteBooking(b.id) }}
                                             >
-                                                Add to cart
+                                                CheckOut
                                             </Button>
-                                            {userRole === "admin" &&
-                                                <Button
-                                                    className="btn-sm mx-1"
-                                                    variant="danger"
-                                                    disabled={!isLoggedIn}
-                                                    onClick={() => { deleteBooking(b.id) }}
-                                                >
-                                                    Delete from list
-                                                </Button>
-                                            }
                                         </td>
                                     </tr>
                                 ))}

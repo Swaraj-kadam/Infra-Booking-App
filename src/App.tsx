@@ -8,6 +8,7 @@ import Login from './components/auth/login.tsx'
 import Logout from './components/auth/Logout.tsx'
 import Error404 from './components/common/404Error.tsx'
 import Booking from './components/booking/Booking.tsx'
+import Room from './components/room/Room.tsx'
 
 function App() {
 
@@ -21,6 +22,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/room" element={<Room />} />
+            
             <Route path="/booking" element={<Booking />} />
             {/* <Route path="/products" element={<Products />} />
           <Route path='/cart' element={

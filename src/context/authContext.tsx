@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 export const AuthProvider = (props) => {
 
     const [authDB, setAuthDB] = useState([
-        { username: "admin", password: "admin", role: "admin" }
+        { id: 1, username: "admin", password: "admin", role: "admin" }
     ]);
 
     const [authenticatedUser, setAuthenticatedUser] = useState(null);
@@ -19,7 +19,7 @@ export const AuthProvider = (props) => {
             const response = authDB.find(user => user.username === username && user.password === password);
             if (response) {
                 setUserRole(response.role);
-                setAuthenticatedUser({ username: response.username, role: response.role });
+                setAuthenticatedUser({ user_id: response.id, username: response.username, role: response.role });
                 showNotification("Login successful", "success");
                 return true;
             } else {
