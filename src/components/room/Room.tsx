@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../context/authContext";
 import { useRoom } from "../../context/RoomContext";
 import { useBooking } from "../../context/bookingContext";
-// import AddRoom from "./addRoom";
+import AddRoom from "./AddRoom";
 
 const Room = () => {
     const { filteredRoom, rooms, deleteRoom } = useRoom();
@@ -28,9 +28,9 @@ const Room = () => {
                 <Card>
                     <Card.Header className="d-flex">
                         <h1>Room List</h1>
-                        {/* {userRole === "admin" && (
-                            <AddRoom />
-                        )} */}
+                        {userRole === "admin" && (
+                            < AddRoom />
+                        )}
                     </Card.Header>
                     <Card.Body>
                         {/* <ProductFilter type={handleProductFilter}></ProductFilter> */}
@@ -53,7 +53,7 @@ const Room = () => {
                                         <td>{b.room}</td>
                                         <td>{b.date}</td>
                                         <td style={{
-                                            backgroundColor: b.status === "Available" ? "green" : "red",
+                                            backgroundColor: b.status === "Available" ? "#28a745" : "#dc3545",
                                             color: "white"
                                         }}
                                         >
@@ -68,7 +68,7 @@ const Room = () => {
                                             >
                                                 {b.status === "Available" ? "Book Now" : "Booked"}
                                             </Button>
-                                            {/* {userRole === "admin" &&
+                                            {userRole === "admin" &&
                                                 <Button
                                                     className="btn-sm mx-1"
                                                     variant="danger"
@@ -77,7 +77,7 @@ const Room = () => {
                                                 >
                                                     Delete from list
                                                 </Button>
-                                            } */}
+                                            }
                                         </td>
                                     </tr>
                                 ))}

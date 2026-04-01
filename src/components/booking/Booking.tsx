@@ -6,19 +6,19 @@ import { useBooking } from "../../context/bookingContext";
 import AddBooking from "./addBooking";
 
 const Booking = () => {
-    const { filteredBooking, booking, deleteBooking } = useBooking();
-    const { isLoggedIn, userRole } = useAuth();
+    const { filteredBooking, booking, checkoutRoom } = useBooking();
+    const { isLoggedIn } = useAuth();
 
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const itemsPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
-    // const indexOfLastSlide = currentPage * itemsPerPage;
-    // const indexOfFirstSlide = indexOfLastSlide - itemsPerPage;
-    // const currentProducts = filteredBooking.slice(indexOfFirstSlide, indexOfLastSlide);
+    const indexOfLastSlide = currentPage * itemsPerPage;
+    const indexOfFirstSlide = indexOfLastSlide - itemsPerPage;
+    const currentProducts = filteredBooking.slice(indexOfFirstSlide, indexOfLastSlide);
 
-    // useEffect(() => {
-    //     setCurrentPage(1);
-    // }, [filteredBooking]);
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [filteredBooking]);
 
     return (
         <>
@@ -41,6 +41,7 @@ const Booking = () => {
                                 </tr>
                             </thead>
                             <tbody>
+                                {booking.length === 0 && <tr><td colSpan={5}>No Bookings Found</td></tr>}
                                 {booking.map(b => (
                                     <tr key={b.id}>
                                         <td>{b.id}</td>
@@ -53,7 +54,7 @@ const Booking = () => {
                                                 className="btn-sm mx-1"
                                                 variant="danger"
                                                 disabled={!isLoggedIn}
-                                                onClick={() => { deleteBooking(b.id) }}
+                                                onClick={() => { checkoutRoom(b.id) }}
                                             >
                                                 CheckOut
                                             </Button>

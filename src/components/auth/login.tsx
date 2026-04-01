@@ -9,7 +9,7 @@ function Login() {
     const [message, setMessage] = useState('Login Pending...');
     const [params] = useSearchParams();
     const { login } = useAuth();
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     // const iRef = useRef();
 
@@ -32,18 +32,17 @@ function Login() {
     const isValid =
         username.length >= 5 && password.length >= 5;
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         // loadData();
 
-        const res = setTimeout(() => {
-            login(username, password);
-        }, 5000)
+        const res = await login(username, password);
+        
 
         if (res) {
             setMessage('Login Successful');
             // iRef.current.close();
-            navigate('/booking');
+            navigate('/room');
         } else {
             setMessage('Login Failed');
         }

@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNotification } from "./notificationContext";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
 
-export const AuthProvider = (props) => {
+export const AuthProvider = (props: any) => {
 
     const [authDB, setAuthDB] = useState([
         { id: 1, username: "admin", password: "admin", role: "admin" }
@@ -19,6 +19,7 @@ export const AuthProvider = (props) => {
             const response = authDB.find(user => user.username === username && user.password === password);
             if (response) {
                 setUserRole(response.role);
+                console.log(response)
                 setAuthenticatedUser({ user_id: response.id, username: response.username, role: response.role });
                 showNotification("Login successful", "success");
                 return true;
